@@ -27,11 +27,18 @@
                         <div class="title">アカウントの作成</div>
                         <label class="label">メールアドレス</label>
                         <input type="email" class="input" id="email" name="email" autocomplete="off" required>
+                        
                         <label class="label">パスワード</label>
                         <input type="password" class="input" id="password" name="password" required>
                         <label class="label">パスワード（確認用）</label>
                         <input type="password" class="input" id="passwordForCheck" name="passwordForCheck" required>
                         <input type="submit" class="button primary" value="作成する" >
+                         <c:if test="${!empty errorLetter}">
+							 <div class="error">${errorLetter}</div>
+						 </c:if>
+						 <c:if test="${!empty errorPW}">
+							 <div class="error">${errorPW}</div>
+						 </c:if>
                     </form>
                 </div>
                 <div class="authorization_navi">
