@@ -69,7 +69,7 @@ public class AccountController {
         if (!isValidEmail || !isValidPassword || !isValidPasswordFC) {
 
             model.addAttribute("errorLetter", "半角英数字で入力してください。");
-            //上記の場合に遷都する
+            //上記の場合に遷都するjsp
             return "createAccount";
 
         }
