@@ -12,8 +12,6 @@ import lombok.Data;
 @Data
 public class UserInfo {
 
-    public static final String getUserId = null;
-
     private int userId;
 
     private String email;
