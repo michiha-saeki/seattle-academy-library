@@ -49,6 +49,9 @@
                             </form>
                             <ul>
                                 <li class="book_title">${bookInfo.title}</li>
+                                <li class="book_author">${bookInfo.author}</li>
+                                <li class="book_publisher">${bookInfo.publisher}</li>
+                                <li class="book_publish_date">${bookInfo.publishDate}</li>
                             </ul>
                         </div>
                     </c:forEach>
