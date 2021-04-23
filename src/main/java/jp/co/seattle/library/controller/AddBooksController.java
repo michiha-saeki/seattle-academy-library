@@ -1,5 +1,6 @@
 package jp.co.seattle.library.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -51,8 +52,11 @@ public class AddBooksController {
     public String insertBook(Locale locale,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
+            @RequestParam("description") String description,
             @RequestParam("publisher") String publisher,
+            @RequestParam("publish_date") String publishDate,
             @RequestParam("thumbnail") MultipartFile file,
+            @RequestParam("isbn") String isbn,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -60,7 +64,30 @@ public class AddBooksController {
         BookDetailsInfo bookInfo = new BookDetailsInfo();
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
+        bookInfo.setDescription(description);
         bookInfo.setPublisher(publisher);
+        bookInfo.setPublishDate(publishDate);
+        bookInfo.setIsbn(isbn);
+
+
+        //出版日とISBNのバリデーションチェック
+        try {
+            //日付の確認
+            SimpleDateFormat pd = new SimpleDateFormat("yyyyMMdd");
+            pd.setLenient(false);
+            pd.parse(publishDate);
+
+        } catch (Exception a) {
+            model.addAttribute("dateError", "出版日は半角数字のYYYYMMDDの形式で入力してください");
+            return "addBook";
+        }
+
+        //ISBNの確認
+        if (!(bookInfo.getIsbn().matches("([0-9]{10}|[0-9]{13})"))) {
+            model.addAttribute("isbnError", "ISBNの桁数または半角数字が正しくありません");
+            return "addBook";
+        }
+
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -90,7 +117,10 @@ public class AddBooksController {
         model.addAttribute("resultMessage", "登録完了");
 
         // TODO 登録した書籍の詳細情報を表示するように実装
-        //  詳細画面に遷移する
+
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
+
+        //  詳細画面に遷移
         return "details";
     }
 
