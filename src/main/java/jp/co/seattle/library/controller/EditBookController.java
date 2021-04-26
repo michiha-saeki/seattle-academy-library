@@ -42,19 +42,21 @@ public class EditBookController {
     /**
      * 書籍情報を編集する　
      * @param locale ロケール情報
-     * @param bookid　
+     * @param bookid　BOOKID
      * @param title 書籍名
      * @param author 著者名
      * @param publisher 出版社
+     * @param publish_date 出版日
      * @param description 説明文
      * @param file サムネイルファイル
+     * @param isbn ISBN
      * @param model モデル
      * @return 遷移先画面
      */
     @Transactional
     @RequestMapping(value = "/reinsertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String insertBook(Locale locale,
-            @RequestParam("bookId") Integer bookId,
+            @RequestParam("bookId") int bookId,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("description") String description,
