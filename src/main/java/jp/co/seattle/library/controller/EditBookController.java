@@ -34,7 +34,7 @@ public class EditBookController {
     @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
     public String login(Model model,
-            @RequestParam("bookId") Integer bookId) { //@RequestParamは引数 元はstring型なのでint型にする
+            @RequestParam("bookId") Integer bookId) { //@RequestParamの引数 元はstring型なのでint型にする
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId)); //編集する前に詳細情報を提示
         return "editBook";
     }
@@ -55,7 +55,7 @@ public class EditBookController {
      */
     @Transactional
     @RequestMapping(value = "/reinsertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-    public String insertBook(Locale locale,
+    public String reinsertBook(Locale locale,
             @RequestParam("bookId") int bookId,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
